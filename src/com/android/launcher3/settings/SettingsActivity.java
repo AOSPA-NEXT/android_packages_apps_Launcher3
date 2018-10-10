@@ -24,6 +24,8 @@ import static com.android.launcher3.BuildConfig.IS_DEBUG_DEVICE;
 import static com.android.launcher3.BuildConfig.IS_STUDIO_BUILD;
 import static com.android.launcher3.states.RotationHelper.ALLOW_ROTATION_PREFERENCE_KEY;
 
+import static co.aospa.launcher.OverlayCallbackImpl.KEY_DESKTOP_LABELS;
+import static co.aospa.launcher.OverlayCallbackImpl.KEY_DRAWER_LABELS;
 import static co.aospa.launcher.OverlayCallbackImpl.KEY_DT_GESTURE;
 import static co.aospa.launcher.OverlayCallbackImpl.KEY_MINUS_ONE;
 
@@ -54,6 +56,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.launcher3.BuildConfig;
+import com.android.launcher3.InvariantDeviceProfile;
 import com.android.launcher3.LauncherFiles;
 import com.android.launcher3.LauncherPrefs;
 import com.android.launcher3.R;
@@ -128,6 +131,10 @@ public class SettingsActivity extends CollapsingToolbarBaseActivity
                         Settings.System.GESTURE_DOUBLE_TAP_SLEEP,
                         sharedPreferences.getBoolean(key, true) ? 1 : 0,
                         UserHandle.USER_CURRENT);
+                break;
+            case KEY_DESKTOP_LABELS:
+            case KEY_DRAWER_LABELS:
+                InvariantDeviceProfile.INSTANCE.get(this).onConfigChanged(getApplicationContext());
                 break;
             default:
                 break;
