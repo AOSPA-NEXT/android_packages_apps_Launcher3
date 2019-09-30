@@ -31,6 +31,14 @@ filegroup {
     ],
 }
 
+filegroup {
+    name: "launcher-src_base",
+    srcs: [
+        "src_base/**/*.java",
+        "src_base/**/*.kt"
+    ],
+}
+
 // Source code for quickstep build, on top of launcher-src
 filegroup {
     name: "launcher-quickstep-src",
@@ -185,6 +193,7 @@ android_app {
     ],
     srcs: [
         ":launcher-src",
+        ":launcher-src_base",
         ":launcher-src_no_quickstep",
         ":launcher-build-config",
     ],
