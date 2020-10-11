@@ -24,6 +24,8 @@ import static com.android.launcher3.BuildConfig.IS_DEBUG_DEVICE;
 import static com.android.launcher3.BuildConfig.IS_STUDIO_BUILD;
 import static com.android.launcher3.states.RotationHelper.ALLOW_ROTATION_PREFERENCE_KEY;
 
+import static co.aospa.launcher.OverlayCallbackImpl.KEY_MINUS_ONE;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -51,6 +53,7 @@ import com.android.launcher3.BuildConfig;
 import com.android.launcher3.LauncherFiles;
 import com.android.launcher3.R;
 import com.android.launcher3.states.RotationHelper;
+import com.android.launcher3.Utilities;
 import com.android.launcher3.util.DisplayController;
 import com.android.launcher3.util.SettingsCache;
 import com.android.settingslib.collapsingtoolbar.CollapsingToolbarBaseActivity;
@@ -162,6 +165,8 @@ public class SettingsActivity extends CollapsingToolbarBaseActivity
         private String mHighLightKey;
         private boolean mPreferenceHighlighted = false;
 
+        private Preference mShowGoogleAppPref;
+
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
             if (BuildConfig.IS_DEBUG_DEVICE) {
@@ -242,6 +247,11 @@ public class SettingsActivity extends CollapsingToolbarBaseActivity
                     preference.setDefaultValue(RotationHelper.getAllowRotationDefaultValue(info));
                     return true;
 
+                case KEY_MINUS_ONE:
+                    mShowGoogleAppPref = preference;
+                    preference.setEnabled(Utilities.isGSAEnabled(getContext()));
+                    return true;
+
                 case DEVELOPER_OPTIONS_KEY:
                     if (IS_STUDIO_BUILD) {
                         preference.setOrder(0);
@@ -262,6 +272,10 @@ public class SettingsActivity extends CollapsingToolbarBaseActivity
                     getView().postDelayed(highlighter, DELAY_HIGHLIGHT_DURATION_MILLIS);
                     mPreferenceHighlighted = true;
                 }
+            }
+
+            if (mShowGoogleAppPref != null) {
+                mShowGoogleAppPref.setEnabled(Utilities.isGSAEnabled(getContext()));
             }
 
             if (mRestartOnResume) {
