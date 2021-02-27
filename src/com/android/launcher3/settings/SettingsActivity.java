@@ -28,6 +28,8 @@ import static co.aospa.launcher.OverlayCallbackImpl.KEY_DESKTOP_LABELS;
 import static co.aospa.launcher.OverlayCallbackImpl.KEY_DOCK_SEARCH;
 import static co.aospa.launcher.OverlayCallbackImpl.KEY_DRAWER_LABELS;
 import static co.aospa.launcher.OverlayCallbackImpl.KEY_DT_GESTURE;
+import static co.aospa.launcher.OverlayCallbackImpl.KEY_FONT_SIZE;
+import static co.aospa.launcher.OverlayCallbackImpl.KEY_ICON_SIZE;
 import static co.aospa.launcher.OverlayCallbackImpl.KEY_MINUS_ONE;
 
 import android.app.Activity;
@@ -139,6 +141,8 @@ public class SettingsActivity extends CollapsingToolbarBaseActivity
                 break;
             case KEY_DESKTOP_LABELS:
             case KEY_DRAWER_LABELS:
+            case KEY_FONT_SIZE:
+            case KEY_ICON_SIZE:
                 InvariantDeviceProfile.INSTANCE.get(this).onConfigChanged(getApplicationContext());
                 break;
             default:
