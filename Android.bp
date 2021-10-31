@@ -138,6 +138,9 @@ android_library {
     name: "Launcher3ResLib",
     srcs: [],
     resource_dirs: ["res"],
+    defaults: [
+        "SettingsLibDefaults",
+    ],
     static_libs: [
         "LauncherPluginLib",
         "launcher_quickstep_log_protos_lite",
@@ -165,6 +168,7 @@ android_library {
         "com_android_wm_shell_flags_lib",
         "android.appwidget.flags-aconfig-java",
         "com.android.window.flags.window-aconfig-java",
+        "SettingsLib",
     ],
     manifest: "AndroidManifest-common.xml",
     sdk_version: "current",
