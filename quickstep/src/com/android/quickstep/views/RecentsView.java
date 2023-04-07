@@ -4306,6 +4306,9 @@ public abstract class RecentsView<CONTAINER_TYPE extends Context & RecentsViewCo
 
     @SuppressWarnings("unused")
     private void dismissAllTasks(View view) {
+        if (view != null) {
+            VibratorWrapper.INSTANCE.get(getContext()).vibrate(VibratorWrapper.EFFECT_CLICK);
+        }
         runDismissAnimation(createAllTasksDismissAnimation(DISMISS_TASK_DURATION));
         mContainer.getStatsLogManager().logger().log(LAUNCHER_TASK_CLEAR_ALL);
     }
